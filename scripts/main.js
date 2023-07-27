@@ -5,16 +5,22 @@ import { renderToDom } from "../utils/renderToDom.js";
 
 // Reusable function to get the cards on the DOM
 // .forEach()
+let refStuff = ''; 
 const renderCards = (array) => {
-  let refStuff = "<h1 class='text-white'>Cards Go Here!</h1>";
-  renderToDom("#cards", refStuff);
+array.forEach((item) => { 
+  refStuff += card(item);
+})
+renderToDom("#cards", refStuff);
 }
+// renderCards(referenceList); 
 
 // UPDATE/ADD ITEMS TO CART
 // .findIndex() & (.includes() - string method)
 const toggleCart = (event) => {
   if (event.target.id.includes("fav-btn")) {
-   console.log('Clicked Fav btn')
+    let preSplit = event.target.id; 
+    const [ , id] = preSplit.split('--'); 
+    referenceList.findIndex((work) => work.id == id);
   }
 }
 

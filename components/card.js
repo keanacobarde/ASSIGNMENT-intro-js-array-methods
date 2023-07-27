@@ -4,7 +4,7 @@
 
 import { youTubeVid } from "./youTubeVid.js";
 
-export const card = (object) => {
+const card = (object) => {
   return `
   <div class="card m-1" style="width: 18rem;">
     <div class="card-image" style="background-image: url(${object.image});"></div>
@@ -58,3 +58,5 @@ export const card = (object) => {
   </div>
   `
 }
+
+export { card } 
