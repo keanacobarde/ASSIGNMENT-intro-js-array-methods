@@ -5,8 +5,8 @@ import { renderToDom } from "../utils/renderToDom.js";
 
 // Reusable function to get the cards on the DOM
 // .forEach()
-let refStuff = ''; 
 const renderCards = (array) => {
+let refStuff = ''; 
 array.forEach((item) => { 
   refStuff += card(item);
 })
@@ -20,31 +20,43 @@ const toggleCart = (event) => {
   if (event.target.id.includes("fav-btn")) {
     let preSplit = event.target.id; 
     const [ , id] = preSplit.split('--'); 
-    referenceList.findIndex((work) => work.id == id);
+    const index = referenceList.findIndex((work) => work.id == id);
+    referenceList[index].inCart = !referenceList[index].inCart; 
+    cartTotal(); 
+    renderCards(referenceList); 
   }
+///The only thing missing is a cart entity to push the specific object to that you're adding to the cart. 
 }
 
 // SEARCH
 // .filter()
 const search = (event) => {
-  const eventLC = event.target.value.toLowerCase();
-  console.log(eventLC)
+  const userInput = event.target.value.toLowerCase();
+  // console.log(eventLC)
+  renderCards(referenceList.filter((work) => work.title.toLowerCase().includes(userInput) || work.author.toLowerCase().includes(userInput) || work.description.toLowerCase().includes(userInput))); 
 }
 
 // BUTTON FILTER
 // .filter() & .reduce() &.sort() - chaining
 const buttonFilter = (event) => {
   if(event.target.id.includes('free')) {
-    console.log('FREE')
+    // console.log('FREE')
+    const freeArray = referenceList.filter((work) => work.price == 0.00);
+    renderCards(freeArray); 
   }
   if(event.target.id.includes('cartFilter')) {
     console.log('cartFilter')
+    const inCartArray = referenceList.filter((work) => work.inCart);
+    renderCards(inCartArray); 
   }
   if(event.target.id.includes('books')) {
-    console.log('books!')
+    // console.log('books!')
+    const bookArray = referenceList.filter((work) => work.type == "Book")
+    renderCards(bookArray); 
   }
   if(event.target.id.includes('clearFilter')) {
-    console.log('clearFilter')
+    // console.log('clearFilter')
+    renderCards(referenceList); 
   }
   if(event.target.id.includes('productList')) {
     let table = `<table class="table table-dark table-striped" style="width: 600px">
@@ -60,7 +72,7 @@ const buttonFilter = (event) => {
     
     productList().forEach(item => {
       table += tableRow(item);
-    });
+    }); 
 
     table += `</tbody></table>`
 
