@@ -22,7 +22,7 @@ const toggleCart = (event) => {
     const [ , id] = preSplit.split('--'); 
     referenceList.findIndex((work) => work.id == id);
   }
-///The only thing missing is a cart entity to push the specific object to. 
+///The only thing missing is a cart entity to push the specific object to that you're adding to the cart. 
 }
 
 // SEARCH
