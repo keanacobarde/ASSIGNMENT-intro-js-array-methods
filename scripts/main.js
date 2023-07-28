@@ -5,8 +5,8 @@ import { renderToDom } from "../utils/renderToDom.js";
 
 // Reusable function to get the cards on the DOM
 // .forEach()
-let refStuff = ''; 
 const renderCards = (array) => {
+let refStuff = ''; 
 array.forEach((item) => { 
   refStuff += card(item);
 })
@@ -22,6 +22,7 @@ const toggleCart = (event) => {
     const [ , id] = preSplit.split('--'); 
     referenceList.findIndex((work) => work.id == id);
   }
+///The only thing missing is a cart entity to push the specific object to. 
 }
 
 // SEARCH
@@ -29,6 +30,7 @@ const toggleCart = (event) => {
 const search = (event) => {
   const eventLC = event.target.value.toLowerCase();
   console.log(eventLC)
+  renderCards(referenceList.filter((work) => work.title.toLowerCase() == eventLC)); 
 }
 
 // BUTTON FILTER
@@ -36,6 +38,8 @@ const search = (event) => {
 const buttonFilter = (event) => {
   if(event.target.id.includes('free')) {
     console.log('FREE')
+    const freeArray = referenceList.filter((work) => work.price == 0.00);
+    renderCards(freeArray); 
   }
   if(event.target.id.includes('cartFilter')) {
     console.log('cartFilter')
@@ -45,6 +49,7 @@ const buttonFilter = (event) => {
   }
   if(event.target.id.includes('clearFilter')) {
     console.log('clearFilter')
+    renderCards(referenceList); 
   }
   if(event.target.id.includes('productList')) {
     let table = `<table class="table table-dark table-striped" style="width: 600px">
@@ -60,7 +65,7 @@ const buttonFilter = (event) => {
     
     productList().forEach(item => {
       table += tableRow(item);
-    });
+    }); 
 
     table += `</tbody></table>`
 
