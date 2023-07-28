@@ -25,7 +25,6 @@ const toggleCart = (event) => {
     cartTotal(); 
     renderCards(referenceList); 
   }
-///The only thing missing is a cart entity to push the specific object to that you're adding to the cart. 
 }
 
 // SEARCH
@@ -84,8 +83,13 @@ const buttonFilter = (event) => {
 // CALCULATE CART TOTAL
 // .reduce() & .some()
 const cartTotal = () => {
-  const total = 0
-  document.querySelector("#cartTotal").innerHTML = total.toFixed(2);
+  const cart = referenceList.filter((work) => work.inCart); 
+  let total = 0 
+  total = cart.reduce((acc, curr) => {
+    return acc + curr.price; 
+  }, 0);
+  console.log(total);   
+  document.querySelector("#cartTotal").innerHTML = total;
 }
 
 // RESHAPE DATA TO RENDER TO DOM
