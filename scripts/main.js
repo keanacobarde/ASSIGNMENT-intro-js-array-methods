@@ -20,7 +20,10 @@ const toggleCart = (event) => {
   if (event.target.id.includes("fav-btn")) {
     let preSplit = event.target.id; 
     const [ , id] = preSplit.split('--'); 
-    referenceList.findIndex((work) => work.id == id);
+    const index = referenceList.findIndex((work) => work.id == id);
+    referenceList[index].inCart = !referenceList[index].inCart; 
+    cartTotal(); 
+    renderCards(referenceList); 
   }
 ///The only thing missing is a cart entity to push the specific object to that you're adding to the cart. 
 }
@@ -28,9 +31,9 @@ const toggleCart = (event) => {
 // SEARCH
 // .filter()
 const search = (event) => {
-  const eventLC = event.target.value.toLowerCase();
-  console.log(eventLC)
-  renderCards(referenceList.filter((work) => work.title.toLowerCase() == eventLC)); 
+  const userInput = event.target.value.toLowerCase();
+  // console.log(eventLC)
+  renderCards(referenceList.filter((work) => work.title.toLowerCase().includes(userInput) || work.author.toLowerCase().includes(userInput) || work.description.toLowerCase().includes(userInput))); 
 }
 
 // BUTTON FILTER
