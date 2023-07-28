@@ -37,18 +37,22 @@ const search = (event) => {
 // .filter() & .reduce() &.sort() - chaining
 const buttonFilter = (event) => {
   if(event.target.id.includes('free')) {
-    console.log('FREE')
+    // console.log('FREE')
     const freeArray = referenceList.filter((work) => work.price == 0.00);
     renderCards(freeArray); 
   }
   if(event.target.id.includes('cartFilter')) {
     console.log('cartFilter')
+    const inCartArray = referenceList.filter((work) => work.inCart);
+    renderCards(inCartArray); 
   }
   if(event.target.id.includes('books')) {
-    console.log('books!')
+    // console.log('books!')
+    const bookArray = referenceList.filter((work) => work.type == "Book")
+    renderCards(bookArray); 
   }
   if(event.target.id.includes('clearFilter')) {
-    console.log('clearFilter')
+    // console.log('clearFilter')
     renderCards(referenceList); 
   }
   if(event.target.id.includes('productList')) {
